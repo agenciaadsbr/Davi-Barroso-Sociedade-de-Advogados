@@ -1,0 +1,81 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Dados recebidos | Davi Barroso Sociedade de Advogados</title>
+<meta name="robots" content="noindex, nofollow">
+<meta name="theme-color" content="#0A1C38">
+<link rel="icon" type="image/png" href="img/favicon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Tenor+Sans&amp;family=Montserrat:wght@400;600;700&amp;display=swap" rel="stylesheet">
+<style>
+*{box-sizing:border-box}
+html,body{height:100%}
+body{margin:0;font-family:'Montserrat',system-ui,-apple-system,'Segoe UI',sans-serif;color:#F4F1EA;background:#0A1C38;-webkit-font-smoothing:antialiased;display:flex;align-items:center;justify-content:center;padding:24px;position:relative;overflow:hidden}
+.glow1{position:fixed;left:-20%;top:-30%;width:720px;height:720px;border-radius:50%;background:radial-gradient(circle,rgba(158,163,171,.22),rgba(158,163,171,0) 62%);pointer-events:none}
+.glow2{position:fixed;right:-20%;bottom:-35%;width:800px;height:800px;border-radius:50%;background:radial-gradient(circle,rgba(60,100,170,.28),rgba(60,100,170,0) 62%);pointer-events:none}
+.card{position:relative;max-width:520px;width:100%;padding:clamp(32px,6vw,52px);text-align:center;display:flex;flex-direction:column;align-items:center;gap:20px;background:linear-gradient(140deg,rgba(255,255,255,.11),rgba(255,255,255,.035));border:1px solid rgba(255,255,255,.14);-webkit-backdrop-filter:blur(20px) saturate(140%);backdrop-filter:blur(20px) saturate(140%);border-radius:14px;box-shadow:0 30px 70px -30px rgba(0,0,0,.65),inset 0 1px 0 rgba(255,255,255,.14)}
+.check{width:60px;height:60px;border-radius:50%;display:flex;align-items:center;justify-content:center;background:rgba(21,122,69,.2);border:1px solid rgba(80,190,130,.4)}
+h1{margin:0;font-family:'Tenor Sans','Optima',Candara,sans-serif;font-weight:400;font-size:clamp(28px,5vw,36px);line-height:1.2;color:#FFFFFF}
+p{margin:0;font-size:16px;line-height:1.7;color:#C9CED6}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:12px;min-height:56px;padding:0 26px;width:100%;background:linear-gradient(180deg,#157A45,#0F6136);color:#FFFFFF;text-decoration:none;font-weight:700;font-size:15.5px;border-radius:6px;border:1px solid rgba(255,255,255,.14);box-shadow:0 14px 34px -14px rgba(16,110,60,.85),inset 0 1px 0 rgba(255,255,255,.22);transition:transform .3s ease,filter .3s ease}
+.btn:hover{transform:translateY(-2px);filter:brightness(1.06)}
+.btn:focus-visible{outline:2px solid #C9CDD3;outline-offset:3px}
+.small{font-size:13px;color:#9AA3B0}
+.bar{width:100%;height:2px;background:rgba(255,255,255,.1);border-radius:2px;overflow:hidden}
+.bar i{display:block;height:100%;width:0;background:#C9CDD3;animation:load 2.5s linear forwards}
+@keyframes load{to{width:100%}}
+.brand{font-family:'Tenor Sans','Optima',Candara,sans-serif;font-size:20px;color:#FFFFFF}
+.brand small{display:block;font-family:'Montserrat',sans-serif;font-size:9.5px;font-weight:600;letter-spacing:.26em;text-transform:uppercase;color:#AEB5C0;margin-top:4px}
+@media (prefers-reduced-motion:reduce){.bar i{animation:none;width:100%}}
+</style>
+</head>
+<body>
+<div class="glow1"></div>
+<div class="glow2"></div>
+<main class="card" role="status">
+<img src="img/logo-branco.webp" alt="Davi Barroso Sociedade de Advogados" width="720" height="264" style="width:180px;height:auto;display:block">
+<span class="check"><svg width="26" height="26" viewBox="0 0 24 24" aria-hidden="true" style="fill:none;stroke:#8FE0B4;stroke-width:2;stroke-linecap:round;stroke-linejoin:round"><path d="M5 12.5l4.5 4.5L19 7.5"></path></svg></span>
+<h1 id="titulo">Dados recebidos</h1>
+<p id="texto">Você será direcionado ao WhatsApp do escritório para continuar o atendimento.</p>
+<div class="bar" id="bar" aria-hidden="true"><i></i></div>
+<a class="btn" id="btn-wa" href="#" rel="noopener">
+<svg width="20" height="20" viewBox="0 0 24 24" aria-hidden="true" style="fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round"><path d="M3.6 20.4l1.3-4.1A8.6 8.6 0 1 1 8.1 19.3z"></path><path d="M9 8.4c.2 3.4 3.1 6.4 6.6 6.6l1.1-1.7-2.1-1-1 .9c-1.1-.4-2.2-1.5-2.6-2.6l.9-1-1-2.1z"></path></svg>
+Abrir o WhatsApp
+</a>
+<span class="small">Se o WhatsApp não abrir automaticamente, toque no botão acima.</span>
+</main>
+<script>
+(function () {
+  // ===== CONFIGURAÇÃO =====
+  // Número do WhatsApp do escritório: DDI + DDD + número, só dígitos. Ex.: 5511999999999
+  var WHATSAPP_NUMERO = '';
+  // Mensagem neutra de propósito: a prévia da conversa não expõe a situação do cliente
+  var MENSAGEM = 'Olá, gostaria de orientação jurídica.';
+  // =========================
+
+  var p = new URLSearchParams(location.search);
+  var nome = (p.get('nome') || '').trim();
+  if (nome) document.getElementById('titulo').textContent = 'Dados recebidos, ' + nome;
+
+  // Eventos de conversão (disparam só se o Pixel / Google tag estiverem instalados nesta página)
+  try { if (typeof fbq === 'function') fbq('track', 'Lead'); } catch (e) {}
+  try { if (typeof gtag === 'function') gtag('event', 'generate_lead'); } catch (e) {}
+
+  var btn = document.getElementById('btn-wa');
+  var numero = String(WHATSAPP_NUMERO).replace(/\D/g, '');
+  if (!numero) {
+    document.getElementById('texto').textContent = 'Recebemos seu contato. A equipe do escritório vai falar com você pelo WhatsApp informado.';
+    document.getElementById('bar').style.display = 'none';
+    btn.style.display = 'none';
+    document.querySelector('.small').style.display = 'none';
+    return;
+  }
+  var url = 'https://wa.me/' + numero + '?text=' + encodeURIComponent(MENSAGEM);
+  btn.href = url;
+  setTimeout(function () { location.href = url; }, 2500);
+})();
+</script>
+</body>
+</html>
