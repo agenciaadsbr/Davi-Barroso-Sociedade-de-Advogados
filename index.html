@@ -136,6 +136,7 @@ input:focus-visible,select:focus-visible,a:focus-visible,button:focus-visible,su
 .fab:hover .fab-label,.fab:focus-visible .fab-label{max-width:220px;opacity:1;padding-left:22px}
 .fab::before{content:"";position:absolute;inset:-6px;border-radius:18px;border:1px solid rgba(31,160,95,.45);animation:fabp 2.8s ease-out infinite;pointer-events:none}
 @keyframes fabp{0%{opacity:.9;transform:scale(.96)}70%,100%{opacity:0;transform:scale(1.12)}}
+.faq-split{grid-template-columns:minmax(0,.75fr) minmax(0,1.25fr)}
 .bg-soft{background-image:radial-gradient(ellipse 40% 50% at 8% 20%,rgba(158,163,171,.16),rgba(158,163,171,0) 70%),radial-gradient(ellipse 45% 55% at 95% 80%,rgba(20,40,80,.12),rgba(20,40,80,0) 70%)}
 .bg-grid{background-image:linear-gradient(rgba(10,28,56,.045) 1px,transparent 1px),linear-gradient(90deg,rgba(10,28,56,.045) 1px,transparent 1px);background-size:64px 64px}
 
@@ -191,7 +192,20 @@ input:focus-visible,select:focus-visible,a:focus-visible,button:focus-visible,su
 .trust{grid-template-columns:repeat(2,minmax(0,1fr)) !important}
 .trust > div{border-left:0 !important;padding:18px 16px !important}
 }
+@media (max-width:860px){
+.faq-split{grid-template-columns:minmax(0,1fr);gap:28px}
+.faq-split .sticky-col{gap:14px !important}
+.faq-panel{padding:4px 18px !important}
+.faq-item summary{padding:16px 0;gap:14px;min-height:44px}
+.faq-item h3{font-size:15.5px !important;line-height:1.4 !important}
+.faq-item p{padding:0 0 18px !important;font-size:14.5px !important;line-height:1.65 !important}
+.faq-plus{width:30px;height:30px}
+.bento{gap:14px}
+.tile{padding:22px;gap:10px}
+.tile h3{font-size:20px}
+}
 @media (max-width:560px){
+.bento .feature{grid-column:1 / -1}
 .bento{grid-template-columns:minmax(0,1fr)}
 .bento .feature{min-height:400px}
 .tile{min-height:auto}
@@ -199,7 +213,7 @@ input:focus-visible,select:focus-visible,a:focus-visible,button:focus-visible,su
 .chip{min-height:auto;flex-direction:row;align-items:center;gap:16px;padding:18px 20px}
 .sit-row{grid-template-columns:34px minmax(0,1fr);padding:16px 8px}
 .sit-row .arr{display:none}
-.btn-wa{width:100%;justify-content:flex-start}
+.btn-wa{width:100%;justify-content:flex-start;white-space:nowrap;padding-right:16px;font-size:15px}
 }
 </style>
 <script type="application/ld+json">
@@ -619,13 +633,13 @@ Conversar sobre meu caso
 
 <!-- 12. FAQ -->
 <section aria-labelledby="t-faq" class="bg-soft">
-<div class="wrap split" style="padding-top: clamp(80px, 9vw, 130px); padding-bottom: clamp(80px, 9vw, 130px); grid-template-columns: minmax(0, 0.75fr) minmax(0, 1.25fr)">
+<div class="wrap split faq-split" style="padding-top: clamp(80px, 9vw, 130px); padding-bottom: clamp(80px, 9vw, 130px); ">
 <div class="sticky-col reveal" style="display: flex; flex-direction: column; gap: 20px">
 <span class="eyebrow" style="color: #5B6370">Perguntas frequentes</span>
 <h2 id="t-faq" class="h2" style="color: #0A1C38">Dúvidas comuns em Direito Penal</h2>
 <p style="margin: 0; font-size: 15px; line-height: 1.7; color: #4A5059">Respostas gerais e informativas. Cada situação depende da análise das circunstâncias e dos documentos do caso.</p>
 </div>
-<div class="glass-l reveal" style="padding: 8px clamp(18px, 3vw, 36px)">
+<div class="glass-l reveal faq-panel" style="padding: 8px clamp(18px, 3vw, 36px)">
 <details class="faq-item">
 <summary><h3 style="margin: 0; font-size: 17px; font-weight: 600; line-height: 1.4; color: #0A1C38">Recebi uma intimação da delegacia. Preciso de advogado?</h3><span class="faq-plus" aria-hidden="true"><svg width="14" height="14" viewBox="0 0 24 24" style="fill: none; stroke: currentColor; stroke-width: 2; stroke-linecap: round"><path d="M12 5v14M5 12h14"></path></svg></span></summary>
 <p style="margin: 0; padding: 0 56px 24px 4px; font-size: 15.5px; line-height: 1.72; color: #3B414A">A presença de advogado não é obrigatória em todos os casos, mas a orientação prévia ajuda a entender em que condição você está sendo chamado — como testemunha, vítima ou investigado — e a exercer os direitos previstos em lei antes de prestar qualquer declaração.</p>
