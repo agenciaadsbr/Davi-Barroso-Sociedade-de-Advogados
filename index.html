@@ -88,9 +88,10 @@ a{color:#5B6370}a:hover{color:#0A1C38}
 /* cards */
 .lift{transition:transform .45s cubic-bezier(.2,.7,.2,1),box-shadow .45s ease,border-color .45s ease,background .45s ease}
 .lift:hover{transform:translateY(-6px);border-color:rgba(201,205,211,.55)}
-.bento{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:18px}
-.bento .feature{grid-column:span 2;grid-row:span 2;min-height:560px;position:relative;border-radius:14px}
-.tile{padding:28px;display:flex;flex-direction:column;gap:14px;min-height:262px}
+.bento{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:18px}
+.bento .feature{grid-column:1 / -1;min-height:440px;position:relative;border-radius:14px}
+.feature-card{right:auto !important;max-width:600px}
+.tile{padding:28px;display:flex;flex-direction:column;gap:14px;min-height:250px}
 .tile .num{font-size:12px;font-weight:600;letter-spacing:.14em;color:rgba(244,241,234,.5)}
 .tile h3{margin:0;font-family:'Tenor Sans','Optima',Candara,sans-serif;font-weight:400;font-size:22px;line-height:1.2;color:#FFFFFF}
 .tile p{margin:0;font-size:14.5px;line-height:1.62;color:#B9C0CB}
@@ -115,6 +116,7 @@ a{color:#5B6370}a:hover{color:#0A1C38}
 .steps{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:22px;position:relative}
 .steps-line{position:absolute;left:8%;right:8%;top:30px;height:1px;background:linear-gradient(90deg,rgba(201,205,211,0),rgba(201,205,211,.6),rgba(201,205,211,0))}
 .node{width:60px;height:60px;border-radius:50%;display:flex;align-items:center;justify-content:center;border:1px solid rgba(201,205,211,.5);background:#0D2142;color:#C9CDD3;font-family:'Tenor Sans','Optima',Candara,sans-serif;font-size:24px;position:relative;z-index:1;box-shadow:0 0 0 8px #0A1C38}
+.sobre-dados dd a:hover{text-decoration:underline}
 .sobre{position:relative;display:grid;grid-template-columns:repeat(12,minmax(0,1fr))}
 .sobre-img{grid-column:1 / span 12;grid-row:1;height:620px;border-radius:14px}
 .sobre-card{grid-column:2 / span 6;grid-row:1;align-self:end;margin-bottom:-90px;padding:clamp(28px,4vw,48px);position:relative;z-index:2}
@@ -150,8 +152,7 @@ input:focus-visible,select:focus-visible,a:focus-visible,button:focus-visible,su
 }
 
 @media (max-width:1080px){
-.bento{grid-template-columns:repeat(2,minmax(0,1fr))}
-.bento .feature{grid-column:span 2;grid-row:auto;min-height:440px}
+.bento .feature{min-height:400px}
 .chip-grid{grid-template-columns:repeat(2,minmax(0,1fr))}
 .sobre-card{grid-column:1 / span 9}
 }
@@ -184,6 +185,7 @@ input:focus-visible,select:focus-visible,a:focus-visible,button:focus-visible,su
 .sobre-img{height:360px}
 .sobre-card{grid-column:1 / span 12;grid-row:2;margin:18px 0 0}
 .sobre{row-gap:0}
+.sobre-dados{grid-template-columns:minmax(0,1fr) !important}
 #sobre{padding-bottom:80px !important}
 .sit-media{padding-bottom:0 !important}
 .sit-card{position:relative !important;right:auto !important;bottom:auto !important;width:auto !important;margin-top:14px}
@@ -205,7 +207,9 @@ input:focus-visible,select:focus-visible,a:focus-visible,button:focus-visible,su
 .faq-item h3{font-size:15.5px !important;line-height:1.4 !important}
 .faq-item p{padding:0 0 18px !important;font-size:14.5px !important;line-height:1.65 !important}
 .faq-plus{width:30px;height:30px}
-.bento{gap:14px}
+.bento{gap:14px;grid-template-columns:repeat(2,minmax(0,1fr))}
+.bento article:last-child{grid-column:1 / -1}
+.feature-card{max-width:none}
 .tile{padding:22px;gap:10px}
 .tile h3{font-size:20px}
 }
@@ -214,6 +218,7 @@ input:focus-visible,select:focus-visible,a:focus-visible,button:focus-visible,su
 .crime-item{padding:13px 0;font-size:14.5px}
 .bento .feature{grid-column:1 / -1}
 .bento{grid-template-columns:minmax(0,1fr)}
+.bento article:last-child{grid-column:auto}
 .bento .feature{min-height:400px}
 .tile{min-height:auto}
 .chip-grid{grid-template-columns:minmax(0,1fr)}
@@ -229,17 +234,60 @@ input:focus-visible,select:focus-visible,a:focus-visible,button:focus-visible,su
   "@type": "LegalService",
   "name": "Davi Barroso Sociedade de Advogados",
   "description": "Defesa criminal e orientação jurídica em Direito Penal no Grande ABC.",
+  "telephone": "+55-11-5071-2608",
+  "address": {
+    "@type": "PostalAddress",
+    "streetAddress": "Rua Coronel Alfredo Flaquer, 125, sala 72",
+    "addressLocality": "Santo André",
+    "addressRegion": "SP",
+    "postalCode": "09020-030",
+    "addressCountry": "BR"
+  },
   "areaServed": [
-    {"@type": "City", "name": "Santo André"},
-    {"@type": "City", "name": "São Bernardo do Campo"},
-    {"@type": "City", "name": "São Caetano do Sul"},
-    {"@type": "City", "name": "Diadema"},
-    {"@type": "City", "name": "Mauá"},
-    {"@type": "City", "name": "Ribeirão Pires"},
-    {"@type": "City", "name": "Rio Grande da Serra"}
+    {
+      "@type": "City",
+      "name": "Santo André"
+    },
+    {
+      "@type": "City",
+      "name": "São Bernardo do Campo"
+    },
+    {
+      "@type": "City",
+      "name": "São Caetano do Sul"
+    },
+    {
+      "@type": "City",
+      "name": "Diadema"
+    },
+    {
+      "@type": "City",
+      "name": "Mauá"
+    },
+    {
+      "@type": "City",
+      "name": "Ribeirão Pires"
+    },
+    {
+      "@type": "City",
+      "name": "Rio Grande da Serra"
+    }
   ],
-  "knowsAbout": ["Direito Penal", "Defesa criminal", "Habeas corpus", "Audiência de custódia", "Inquérito policial", "Execução penal", "Revisão criminal"]
+  "knowsAbout": [
+    "Direito Penal",
+    "Defesa criminal",
+    "Inquérito policial",
+    "Audiência de custódia",
+    "Habeas corpus",
+    "Justiça penal consensual",
+    "Recursos criminais",
+    "Execução penal",
+    "Revisão criminal"
+  ]
 }
+</script>
+<script type="application/ld+json">
+{"@context": "https://schema.org", "@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": "Recebi uma intimação da delegacia. O que faço?", "acceptedAnswer": {"@type": "Answer", "text": "A orientação e o acompanhamento de um advogado criminalista são fundamentais para compreender os motivos da intimação, identificar a natureza da investigação e definir a estratégia defensiva mais adequada. A assistência do advogado também permite que o intimado conheça e exerça seus direitos, especialmente no momento de prestar declarações perante a autoridade policial."}}, {"@type": "Question", "name": "O que acontece em uma audiência de custódia?", "acceptedAnswer": {"@type": "Answer", "text": "Na audiência de custódia, a pessoa presa é apresentada a um juiz, que analisa a legalidade da prisão e a necessidade de sua manutenção. Após ouvir o Ministério Público e a defesa, o magistrado decide se a pessoa poderá responder em liberdade, com ou sem medidas cautelares, ou se a prisão deverá ser mantida."}}, {"@type": "Question", "name": "Fui acusado de um crime. O que devo fazer?", "acceptedAnswer": {"@type": "Answer", "text": "Evite prestar declarações ou discutir o fato antes de receber orientação jurídica. Guarde intimações, documentos e mensagens relacionados e procure um advogado criminalista para avaliar a situação e os próximos passos."}}, {"@type": "Question", "name": "Uma medida protetiva significa que já existe uma condenação?", "acceptedAnswer": {"@type": "Answer", "text": "Não. A medida protetiva é uma decisão de urgência, que pode ser concedida antes de qualquer processo, e não equivale a condenação. Ainda assim, deve ser cumprida enquanto estiver em vigor: o descumprimento é crime."}}, {"@type": "Question", "name": "É possível recorrer de uma sentença condenatória?", "acceptedAnswer": {"@type": "Answer", "text": "Sim. A defesa pode recorrer de uma sentença condenatória para solicitar a reavaliação da decisão por uma instância superior, buscando, conforme o caso, a absolvição, a redução da pena, a alteração do regime de cumprimento ou a anulação do processo. Como os prazos para recorrer são curtos, é importante procurar um advogado criminalista o quanto antes para analisar a sentença e orientar a defesa."}}, {"@type": "Question", "name": "Foi expedido um mandado de prisão. E agora?", "acceptedAnswer": {"@type": "Answer", "text": "A expedição de um mandado de prisão exige atenção imediata. É fundamental procurar um advogado criminalista para identificar a origem da ordem, avaliar a existência de eventuais ilegalidades e definir a estratégia jurídica adequada para o caso."}}, {"@type": "Question", "name": "Fui condenado. Quais são as possibilidades na execução penal?", "acceptedAnswer": {"@type": "Answer", "text": "A condenação não encerra as possibilidades de atuação da defesa. Na fase de execução penal, o advogado criminalista acompanha o cumprimento da pena e avalia os direitos e benefícios aplicáveis ao caso, como a detração penal, a remição da pena, a progressão de regime, o indulto e a comutação da pena. A atuação do advogado criminalista é fundamental para assegurar os direitos do apenado e o cumprimento da pena em conformidade com a legislação vigente."}}, {"@type": "Question", "name": "É possível revisar uma condenação criminal?", "acceptedAnswer": {"@type": "Answer", "text": "Sim. A revisão criminal permite impugnar uma condenação definitiva nas hipóteses previstas em lei, como quando a sentença condenatória for contrária ao texto expresso da lei penal ou à evidência dos autos, se fundamentar em provas comprovadamente falsas ou quando surgirem novas provas de inocência do condenado. Conforme o caso, o pedido pode buscar a absolvição, a redução da pena ou a desclassificação para outro crime."}}]}
 </script>
 </head>
 <body>
@@ -290,23 +338,31 @@ Falar com um advogado
 </div>
 <div class="float-stack fade d4">
 <div class="glass-d float-a">
-<span style="display: block; font-size: 11px; font-weight: 600; letter-spacing: 0.2em; text-transform: uppercase; color: #C9CDD3">Do inquérito às cortes superiores</span>
-<div style="display: flex; flex-direction: column; margin-top: 16px">
-<div style="display: flex; align-items: center; gap: 14px; padding: 12px 0; border-top: 1px solid rgba(255, 255, 255, 0.1)">
+<span style="display: block; font-size: 11px; font-weight: 600; letter-spacing: 0.2em; text-transform: uppercase; color: #C9CDD3">Do inquérito aos Tribunais Superiores</span>
+<div style="display: flex; flex-direction: column; margin-top: 14px">
+<div style="display: flex; align-items: center; gap: 14px; padding: 10px 0; border-top: 1px solid rgba(255, 255, 255, 0.1)">
 <svg width="20" height="20" viewBox="0 0 24 24" aria-hidden="true" style="fill: none; stroke: #C9CDD3; stroke-width: 1.5; stroke-linecap: round; stroke-linejoin: round; flex-shrink: 0"><circle cx="11" cy="11" r="6"></circle><path d="M20 20l-4.5-4.5"></path></svg>
-<span style="font-size: 15px; color: #F3F4F6">Inquérito policial</span>
+<span style="font-size: 15px; color: #F3F4F6">Inquéritos Policiais</span>
 </div>
-<div style="display: flex; align-items: center; gap: 14px; padding: 12px 0; border-top: 1px solid rgba(255, 255, 255, 0.1)">
-<svg width="20" height="20" viewBox="0 0 24 24" aria-hidden="true" style="fill: none; stroke: #C9CDD3; stroke-width: 1.5; stroke-linecap: round; stroke-linejoin: round; flex-shrink: 0"><path d="M14 3H6v18h12V7z"></path><path d="M14 3v4h4M9 12h6M9 16h4"></path></svg>
-<span style="font-size: 15px; color: #F3F4F6">Processo em primeira instância</span>
+<div style="display: flex; align-items: center; gap: 14px; padding: 10px 0; border-top: 1px solid rgba(255, 255, 255, 0.1)">
+<svg width="20" height="20" viewBox="0 0 24 24" aria-hidden="true" style="fill: none; stroke: #C9CDD3; stroke-width: 1.5; stroke-linecap: round; stroke-linejoin: round; flex-shrink: 0"><path d="M3 7.5L12 3l9 4.5v9L12 21l-9-4.5z"></path><path d="M3 7.5l9 4.5 9-4.5M12 12v9"></path></svg>
+<span style="font-size: 15px; color: #F3F4F6">Busca e Apreensão</span>
 </div>
-<div style="display: flex; align-items: center; gap: 14px; padding: 12px 0; border-top: 1px solid rgba(255, 255, 255, 0.1)">
+<div style="display: flex; align-items: center; gap: 14px; padding: 10px 0; border-top: 1px solid rgba(255, 255, 255, 0.1)">
+<svg width="20" height="20" viewBox="0 0 24 24" aria-hidden="true" style="fill: none; stroke: #C9CDD3; stroke-width: 1.5; stroke-linecap: round; stroke-linejoin: round; flex-shrink: 0"><path d="M14 3H6v18h12V7z"></path><path d="M14 3v4h4"></path><circle cx="12" cy="14.5" r="2.5"></circle></svg>
+<span style="font-size: 15px; color: #F3F4F6">Mandados de Prisão</span>
+</div>
+<div style="display: flex; align-items: center; gap: 14px; padding: 10px 0; border-top: 1px solid rgba(255, 255, 255, 0.1)">
+<svg width="20" height="20" viewBox="0 0 24 24" aria-hidden="true" style="fill: none; stroke: #C9CDD3; stroke-width: 1.5; stroke-linecap: round; stroke-linejoin: round; flex-shrink: 0"><path d="M12 3l8 3v6c0 4.5-3.4 8.2-8 9-4.6-.8-8-4.5-8-9V6z"></path></svg>
+<span style="font-size: 15px; color: #F3F4F6">Defesa em Processos Criminais</span>
+</div>
+<div style="display: flex; align-items: center; gap: 14px; padding: 10px 0; border-top: 1px solid rgba(255, 255, 255, 0.1)">
 <svg width="20" height="20" viewBox="0 0 24 24" aria-hidden="true" style="fill: none; stroke: #C9CDD3; stroke-width: 1.5; stroke-linecap: round; stroke-linejoin: round; flex-shrink: 0"><path d="M6 18L18 6M9 6h9v9"></path></svg>
-<span style="font-size: 15px; color: #F3F4F6">Recursos nos tribunais</span>
+<span style="font-size: 15px; color: #F3F4F6">Recursos Criminais</span>
 </div>
-<div style="display: flex; align-items: center; gap: 14px; padding: 12px 0 0; border-top: 1px solid rgba(255, 255, 255, 0.1)">
-<svg width="20" height="20" viewBox="0 0 24 24" aria-hidden="true" style="fill: none; stroke: #C9CDD3; stroke-width: 1.5; stroke-linecap: round; stroke-linejoin: round; flex-shrink: 0"><path d="M3 21h18M5 21V10M19 21V10M9.5 21V10M14.5 21V10M2.5 10L12 4l9.5 6"></path></svg>
-<span style="font-size: 15px; color: #F3F4F6">Tribunais superiores (STJ e STF)</span>
+<div style="display: flex; align-items: center; gap: 14px; padding: 10px 0 0; border-top: 1px solid rgba(255, 255, 255, 0.1)">
+<svg width="20" height="20" viewBox="0 0 24 24" aria-hidden="true" style="fill: none; stroke: #C9CDD3; stroke-width: 1.5; stroke-linecap: round; stroke-linejoin: round; flex-shrink: 0"><rect x="3.5" y="5" width="17" height="15.5" rx="1.5"></rect><path d="M3.5 10h17M8 3v4M16 3v4"></path></svg>
+<span style="font-size: 15px; color: #F3F4F6">Execução Penal</span>
 </div>
 </div>
 </div>
@@ -374,64 +430,72 @@ Falar com um advogado
 <span class="ico"><svg width="22" height="22" viewBox="0 0 24 24" aria-hidden="true" style="fill: none; stroke: currentColor; stroke-width: 1.4; stroke-linecap: round; stroke-linejoin: round"><path d="M3 21h18M5 21V11M19 21V11M9.5 21v-5h5v5M2.5 11L12 4.5 21.5 11"></path></svg></span>
 <span class="num">01</span>
 </div>
-<h3 style="margin-top: auto">Atendimento em Delegacias</h3>
-<p>Orientação e acompanhamento em depoimentos, intimações e demais situações perante a autoridade policial.</p>
-</article>
-<article class="tile tile-solid lift reveal">
-<div style="display: flex; justify-content: space-between; align-items: flex-start">
-<span class="ico"><svg width="22" height="22" viewBox="0 0 24 24" aria-hidden="true" style="fill: none; stroke: currentColor; stroke-width: 1.4; stroke-linecap: round; stroke-linejoin: round"><path d="M13 3H6v18h6"></path><path d="M13 3l5 5v2"></path><circle cx="16.5" cy="15.5" r="3.5"></circle><path d="M19 18l2.5 2.5"></path></svg></span>
-<span class="num">02</span>
-</div>
-<h3 style="margin-top: auto">Inquéritos Policiais</h3>
-<p>Atuação na defesa de investigados durante a fase de investigação.</p>
+<h3 style="margin-top: 16px">Atendimento em Delegacias</h3>
+<p>Acompanhamento de prisões em flagrante e demais diligências.</p>
 </article>
 <article class="tile tile-solid lift reveal">
 <div style="display: flex; justify-content: space-between; align-items: flex-start">
 <span class="ico"><svg width="22" height="22" viewBox="0 0 24 24" aria-hidden="true" style="fill: none; stroke: currentColor; stroke-width: 1.4; stroke-linecap: round; stroke-linejoin: round"><circle cx="12" cy="12" r="9"></circle><path d="M12 7v5l3 2"></path></svg></span>
-<span class="num">03</span>
+<span class="num">02</span>
 </div>
-<h3 style="margin-top: auto">Audiência de Custódia</h3>
-<p>Atuação jurídica após a prisão em flagrante e acompanhamento da audiência de custódia.</p>
+<h3 style="margin-top: 16px">Audiência de Custódia</h3>
+<p>Expertise no acompanhamento e realização da audiência de custódia, orientando e defendendo com excelência, para assegurar os direitos do acusado e a devida aplicação da lei.</p>
 </article>
 <article class="glass-d tile lift reveal">
 <div style="display: flex; justify-content: space-between; align-items: flex-start">
-<span class="ico"><svg width="22" height="22" viewBox="0 0 24 24" aria-hidden="true" style="fill: none; stroke: currentColor; stroke-width: 1.4; stroke-linecap: round; stroke-linejoin: round"><circle cx="8" cy="15" r="4"></circle><path d="M11 12l8.5-8.5M16.5 6.5l3 3M14 9l2 2"></path></svg></span>
+<span class="ico"><svg width="22" height="22" viewBox="0 0 24 24" aria-hidden="true" style="fill: none; stroke: currentColor; stroke-width: 1.4; stroke-linecap: round; stroke-linejoin: round"><path d="M13 3H6v18h6"></path><path d="M13 3l5 5v2"></path><circle cx="16.5" cy="15.5" r="3.5"></circle><path d="M19 18l2.5 2.5"></path></svg></span>
+<span class="num">03</span>
+</div>
+<h3 style="margin-top: 16px">Inquéritos Policiais</h3>
+<p>Atuação desde a instauração até o relatório final, incluindo o acompanhamento de clientes em sede policial e os demais atos necessários ao caso.</p>
+</article>
+<article class="tile tile-solid lift reveal">
+<div style="display: flex; justify-content: space-between; align-items: flex-start">
+<span class="ico"><svg width="22" height="22" viewBox="0 0 24 24" aria-hidden="true" style="fill: none; stroke: currentColor; stroke-width: 1.4; stroke-linecap: round; stroke-linejoin: round"><circle cx="12" cy="12" r="9"></circle><path d="M8 12.5l3 3 5-6"></path></svg></span>
 <span class="num">04</span>
 </div>
-<h3 style="margin-top: auto">Habeas Corpus</h3>
-<p>Análise e atuação em situações que envolvam constrangimento ilegal ou restrições indevidas à liberdade.</p>
+<h3 style="margin-top: 16px">Atuação na Justiça Penal Consensual</h3>
+<p>Acordo de Não Persecução Penal (ANPP), Transação Penal, Composição Civil e Suspensão Condicional do Processo.</p>
 </article>
 <article class="glass-d tile lift reveal">
 <div style="display: flex; justify-content: space-between; align-items: flex-start">
 <span class="ico"><svg width="22" height="22" viewBox="0 0 24 24" aria-hidden="true" style="fill: none; stroke: currentColor; stroke-width: 1.4; stroke-linecap: round; stroke-linejoin: round"><path d="M12 3l8 3v6c0 4.5-3.4 8.2-8 9-4.6-.8-8-4.5-8-9V6z"></path></svg></span>
 <span class="num">05</span>
 </div>
-<h3 style="margin-top: auto">Defesa em Processos Criminais</h3>
-<p>Atuação na defesa técnica de pessoas investigadas ou processadas criminalmente.</p>
+<h3 style="margin-top: 16px">Defesas em Processos Criminais</h3>
+<p>Juizado Especial Criminal (JECRIM), Justiça Estadual e Justiça Federal.</p>
 </article>
 <article class="tile tile-solid lift reveal">
 <div style="display: flex; justify-content: space-between; align-items: flex-start">
 <span class="ico"><svg width="22" height="22" viewBox="0 0 24 24" aria-hidden="true" style="fill: none; stroke: currentColor; stroke-width: 1.4; stroke-linecap: round; stroke-linejoin: round"><path d="M6 18L18 6M9 6h9v9"></path></svg></span>
 <span class="num">06</span>
 </div>
-<h3 style="margin-top: auto">Recursos Criminais</h3>
-<p>Atuação na análise e elaboração de recursos dentro das possibilidades previstas na legislação.</p>
+<h3 style="margin-top: 16px">Recursos Criminais</h3>
+<p>Tribunais Estaduais e Federais, Superior Tribunal de Justiça (STJ) e Supremo Tribunal Federal (STF).</p>
+</article>
+<article class="glass-d tile lift reveal">
+<div style="display: flex; justify-content: space-between; align-items: flex-start">
+<span class="ico"><svg width="22" height="22" viewBox="0 0 24 24" aria-hidden="true" style="fill: none; stroke: currentColor; stroke-width: 1.4; stroke-linecap: round; stroke-linejoin: round"><circle cx="8" cy="15" r="4"></circle><path d="M11 12l8.5-8.5M16.5 6.5l3 3M14 9l2 2"></path></svg></span>
+<span class="num">07</span>
+</div>
+<h3 style="margin-top: 16px">Habeas Corpus</h3>
+<p>Preventivo ou liberatório.</p>
 </article>
 <article class="tile tile-solid lift reveal">
 <div style="display: flex; justify-content: space-between; align-items: flex-start">
 <span class="ico"><svg width="22" height="22" viewBox="0 0 24 24" aria-hidden="true" style="fill: none; stroke: currentColor; stroke-width: 1.4; stroke-linecap: round; stroke-linejoin: round"><rect x="3.5" y="5" width="17" height="15.5" rx="1.5"></rect><path d="M3.5 10h17M8 3v4M16 3v4"></path></svg></span>
-<span class="num">07</span>
+<span class="num">08</span>
 </div>
-<h3 style="margin-top: auto">Execução Penal</h3>
-<p>Atuação em questões relacionadas ao cumprimento da pena, incluindo progressão de regime e outros pedidos cabíveis.</p>
+<h3 style="margin-top: 16px">Processos de Execução Penal</h3>
+<p>Livramento condicional, unificação de penas, progressão de regime e demais pedidos de benefício em processo de execução penal.</p>
 </article>
 <article class="glass-d tile lift reveal">
 <div style="display: flex; justify-content: space-between; align-items: flex-start">
 <span class="ico"><svg width="22" height="22" viewBox="0 0 24 24" aria-hidden="true" style="fill: none; stroke: currentColor; stroke-width: 1.4; stroke-linecap: round; stroke-linejoin: round"><path d="M20 12a8 8 0 1 1-2.3-5.6"></path><path d="M20 4v5h-5"></path></svg></span>
-<span class="num">08</span>
+<span class="num">09</span>
 </div>
-<h3 style="margin-top: auto">Revisão Criminal</h3>
-<p>Análise da possibilidade de revisão de condenações definitivas nas hipóteses previstas em lei.</p>
+<h3 style="margin-top: 16px">Ação de Revisão Criminal</h3>
+<p>Análise do caso concreto com decisão transitada em julgado, visando à viabilidade da desconstituição do decreto condenatório.</p>
 </article>
 </div>
 </div>
@@ -458,15 +522,14 @@ Falar com um advogado
 </div>
 <ul class="reveal" style="margin: 0; padding: 0; list-style: none; display: flex; flex-direction: column; border-bottom: 1px solid rgba(10, 28, 56, 0.1)">
 <li class="sit-row"><span class="serif" style="font-size: 22px; color: #9EA3AB">01</span><span style="font-size: 16.5px; line-height: 1.45; color: #1C2129">Recebeu uma intimação da delegacia</span><svg class="arr" width="18" height="18" viewBox="0 0 24 24" aria-hidden="true" style="fill: none; stroke: currentColor; stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round"><path d="M5 12h14M13 6l6 6-6 6"></path></svg></li>
-<li class="sit-row"><span class="serif" style="font-size: 22px; color: #9EA3AB">02</span><span style="font-size: 16.5px; line-height: 1.45; color: #1C2129">Foi chamado para prestar depoimento</span><svg class="arr" width="18" height="18" viewBox="0 0 24 24" aria-hidden="true" style="fill: none; stroke: currentColor; stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round"><path d="M5 12h14M13 6l6 6-6 6"></path></svg></li>
-<li class="sit-row"><span class="serif" style="font-size: 22px; color: #9EA3AB">03</span><span style="font-size: 16.5px; line-height: 1.45; color: #1C2129">Está sendo investigado em um inquérito</span><svg class="arr" width="18" height="18" viewBox="0 0 24 24" aria-hidden="true" style="fill: none; stroke: currentColor; stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round"><path d="M5 12h14M13 6l6 6-6 6"></path></svg></li>
-<li class="sit-row"><span class="serif" style="font-size: 22px; color: #9EA3AB">04</span><span style="font-size: 16.5px; line-height: 1.45; color: #1C2129">Foi preso em flagrante</span><svg class="arr" width="18" height="18" viewBox="0 0 24 24" aria-hidden="true" style="fill: none; stroke: currentColor; stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round"><path d="M5 12h14M13 6l6 6-6 6"></path></svg></li>
-<li class="sit-row"><span class="serif" style="font-size: 22px; color: #9EA3AB">05</span><span style="font-size: 16.5px; line-height: 1.45; color: #1C2129">Precisa de acompanhamento em audiência de custódia</span><svg class="arr" width="18" height="18" viewBox="0 0 24 24" aria-hidden="true" style="fill: none; stroke: currentColor; stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round"><path d="M5 12h14M13 6l6 6-6 6"></path></svg></li>
+<li class="sit-row"><span class="serif" style="font-size: 22px; color: #9EA3AB">02</span><span style="font-size: 16.5px; line-height: 1.45; color: #1C2129">Foi preso em flagrante</span><svg class="arr" width="18" height="18" viewBox="0 0 24 24" aria-hidden="true" style="fill: none; stroke: currentColor; stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round"><path d="M5 12h14M13 6l6 6-6 6"></path></svg></li>
+<li class="sit-row"><span class="serif" style="font-size: 22px; color: #9EA3AB">03</span><span style="font-size: 16.5px; line-height: 1.45; color: #1C2129">Possui um mandado de prisão</span><svg class="arr" width="18" height="18" viewBox="0 0 24 24" aria-hidden="true" style="fill: none; stroke: currentColor; stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round"><path d="M5 12h14M13 6l6 6-6 6"></path></svg></li>
+<li class="sit-row"><span class="serif" style="font-size: 22px; color: #9EA3AB">04</span><span style="font-size: 16.5px; line-height: 1.45; color: #1C2129">Foi alvo de um mandado de busca e apreensão</span><svg class="arr" width="18" height="18" viewBox="0 0 24 24" aria-hidden="true" style="fill: none; stroke: currentColor; stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round"><path d="M5 12h14M13 6l6 6-6 6"></path></svg></li>
+<li class="sit-row"><span class="serif" style="font-size: 22px; color: #9EA3AB">05</span><span style="font-size: 16.5px; line-height: 1.45; color: #1C2129">Recebeu uma medida protetiva de urgência</span><svg class="arr" width="18" height="18" viewBox="0 0 24 24" aria-hidden="true" style="fill: none; stroke: currentColor; stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round"><path d="M5 12h14M13 6l6 6-6 6"></path></svg></li>
 <li class="sit-row"><span class="serif" style="font-size: 22px; color: #9EA3AB">06</span><span style="font-size: 16.5px; line-height: 1.45; color: #1C2129">Responde a um processo criminal</span><svg class="arr" width="18" height="18" viewBox="0 0 24 24" aria-hidden="true" style="fill: none; stroke: currentColor; stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round"><path d="M5 12h14M13 6l6 6-6 6"></path></svg></li>
-<li class="sit-row"><span class="serif" style="font-size: 22px; color: #9EA3AB">07</span><span style="font-size: 16.5px; line-height: 1.45; color: #1C2129">Recebeu uma medida relacionada a investigação criminal</span><svg class="arr" width="18" height="18" viewBox="0 0 24 24" aria-hidden="true" style="fill: none; stroke: currentColor; stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round"><path d="M5 12h14M13 6l6 6-6 6"></path></svg></li>
-<li class="sit-row"><span class="serif" style="font-size: 22px; color: #9EA3AB">08</span><span style="font-size: 16.5px; line-height: 1.45; color: #1C2129">Precisa avaliar um habeas corpus</span><svg class="arr" width="18" height="18" viewBox="0 0 24 24" aria-hidden="true" style="fill: none; stroke: currentColor; stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round"><path d="M5 12h14M13 6l6 6-6 6"></path></svg></li>
-<li class="sit-row"><span class="serif" style="font-size: 22px; color: #9EA3AB">09</span><span style="font-size: 16.5px; line-height: 1.45; color: #1C2129">Está cumprindo pena e precisa analisar um pedido na execução penal</span><svg class="arr" width="18" height="18" viewBox="0 0 24 24" aria-hidden="true" style="fill: none; stroke: currentColor; stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round"><path d="M5 12h14M13 6l6 6-6 6"></path></svg></li>
-<li class="sit-row"><span class="serif" style="font-size: 22px; color: #9EA3AB">10</span><span style="font-size: 16.5px; line-height: 1.45; color: #1C2129">Foi condenado e deseja verificar a possibilidade de revisão criminal</span><svg class="arr" width="18" height="18" viewBox="0 0 24 24" aria-hidden="true" style="fill: none; stroke: currentColor; stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round"><path d="M5 12h14M13 6l6 6-6 6"></path></svg></li>
+<li class="sit-row"><span class="serif" style="font-size: 22px; color: #9EA3AB">07</span><span style="font-size: 16.5px; line-height: 1.45; color: #1C2129">Foi condenado e deseja recorrer</span><svg class="arr" width="18" height="18" viewBox="0 0 24 24" aria-hidden="true" style="fill: none; stroke: currentColor; stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round"><path d="M5 12h14M13 6l6 6-6 6"></path></svg></li>
+<li class="sit-row"><span class="serif" style="font-size: 22px; color: #9EA3AB">08</span><span style="font-size: 16.5px; line-height: 1.45; color: #1C2129">Está cumprindo pena e precisa analisar um pedido na execução penal</span><svg class="arr" width="18" height="18" viewBox="0 0 24 24" aria-hidden="true" style="fill: none; stroke: currentColor; stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round"><path d="M5 12h14M13 6l6 6-6 6"></path></svg></li>
+<li class="sit-row"><span class="serif" style="font-size: 22px; color: #9EA3AB">09</span><span style="font-size: 16.5px; line-height: 1.45; color: #1C2129">Foi condenado e deseja verificar a possibilidade de revisão criminal</span><svg class="arr" width="18" height="18" viewBox="0 0 24 24" aria-hidden="true" style="fill: none; stroke: currentColor; stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round"><path d="M5 12h14M13 6l6 6-6 6"></path></svg></li>
 </ul>
 </div>
 </section>
@@ -533,6 +596,8 @@ Conversar sobre meu caso
 <li class="crime-item"><span class="crime-dot" aria-hidden="true"></span>Crimes Cibernéticos</li>
 <li class="crime-item"><span class="crime-dot" aria-hidden="true"></span>Violência Doméstica e Familiar</li>
 <li class="crime-item"><span class="crime-dot" aria-hidden="true"></span>Crimes de Trânsito</li>
+<li class="crime-item"><span class="crime-dot" aria-hidden="true"></span>Crimes contra o Patrimônio</li>
+<li class="crime-item"><span class="crime-dot" aria-hidden="true"></span>Crimes contra a Dignidade Sexual</li>
 </ul>
 </div>
 </section>
@@ -604,6 +669,20 @@ Conversar sobre meu caso
 <h2 id="t-sobre" class="h2" style="color: #0A1C38">Davi Barroso Sociedade de Advogados</h2>
 <p style="margin: 0; font-size: 16.5px; line-height: 1.75; color: #2E343C">O Davi Barroso Sociedade de Advogados atua na orientação e na defesa de pessoas envolvidas em questões criminais, da fase de investigação ao processo e à execução penal.</p>
 <p style="margin: 0; font-size: 16.5px; line-height: 1.75; color: #2E343C">Cada caso é tratado de forma individualizada, a partir das circunstâncias e dos documentos apresentados. A atuação voltada ao Grande ABC permite a proximidade necessária em situações que exigem presença.</p>
+<dl class="sobre-dados" style="margin: 4px 0 0; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); column-gap: 28px">
+<div style="border-top: 1px solid rgba(10, 28, 56, 0.1); padding: 14px 0; display: flex; flex-direction: column; gap: 4px">
+<dt style="font-size: 11px; font-weight: 600; letter-spacing: 0.18em; text-transform: uppercase; color: #5B6370">Advogado responsável</dt>
+<dd style="margin: 0; font-size: 15px; line-height: 1.55; color: #0A1C38">Davi Barroso Alberto<br>OAB/SP 497.624</dd>
+</div>
+<div style="border-top: 1px solid rgba(10, 28, 56, 0.1); padding: 14px 0; display: flex; flex-direction: column; gap: 4px">
+<dt style="font-size: 11px; font-weight: 600; letter-spacing: 0.18em; text-transform: uppercase; color: #5B6370">Telefone</dt>
+<dd style="margin: 0; font-size: 15px; line-height: 1.55; color: #0A1C38"><a href="tel:+551150712608" style="color: #0A1C38; text-decoration: none">(11) 5071-2608</a></dd>
+</div>
+<div style="border-top: 1px solid rgba(10, 28, 56, 0.1); padding: 14px 0; display: flex; flex-direction: column; gap: 4px; grid-column: 1 / -1">
+<dt style="font-size: 11px; font-weight: 600; letter-spacing: 0.18em; text-transform: uppercase; color: #5B6370">Endereço</dt>
+<dd style="margin: 0; font-size: 15px; line-height: 1.55; color: #0A1C38">Rua Coronel Alfredo Flaquer, 125, sala 72<br>Centro, Santo André/SP, 09020-030</dd>
+</div>
+</dl>
 </div>
 </div>
 </section>
@@ -625,6 +704,7 @@ Conversar sobre meu caso
 <li style="display: flex; gap: 14px; align-items: baseline; padding: 13px 0; border-top: 1px solid rgba(255, 255, 255, 0.1)"><span style="font-size: 11px; font-weight: 600; color: #C9CDD3; letter-spacing: 0.1em">06</span><span style="font-size: 16px; color: #F3F4F6">Ribeirão Pires</span></li>
 <li style="display: flex; gap: 14px; align-items: baseline; padding: 13px 0; border-top: 1px solid rgba(255, 255, 255, 0.1)"><span style="font-size: 11px; font-weight: 600; color: #C9CDD3; letter-spacing: 0.1em">07</span><span style="font-size: 16px; color: #F3F4F6">Rio Grande da Serra</span></li>
 </ol>
+<p style="margin: 6px 0 0; display: flex; gap: 12px; align-items: flex-start; font-size: 14.5px; line-height: 1.6; color: #C9CED6"><svg width="18" height="18" viewBox="0 0 24 24" aria-hidden="true" style="fill: none; stroke: #C9CDD3; stroke-width: 1.5; stroke-linecap: round; stroke-linejoin: round; flex-shrink: 0"><path d="M12 21s-7-6.2-7-11.5A7 7 0 0 1 19 9.5C19 14.8 12 21 12 21z"></path><circle cx="12" cy="9.5" r="2.5"></circle></svg><span>Escritório em Santo André: Rua Coronel Alfredo Flaquer, 125, sala 72, Centro, Santo André/SP, 09020-030</span></p>
 </div>
 <figure class="glass-d reveal" style="margin: 0; padding: clamp(16px, 2.4vw, 28px); display: flex; flex-direction: column; gap: 12px">
 <svg viewBox="0 0 540 420" role="img" aria-label="Mapa esquemático das sete cidades do Grande ABC atendidas" style="width: 100%; height: auto; display: block">
@@ -664,48 +744,36 @@ Conversar sobre meu caso
 </div>
 <div class="glass-l reveal faq-panel" style="padding: 8px clamp(18px, 3vw, 36px)">
 <details class="faq-item">
-<summary><h3 style="margin: 0; font-size: 17px; font-weight: 600; line-height: 1.4; color: #0A1C38">Recebi uma intimação da delegacia. Preciso de advogado?</h3><span class="faq-plus" aria-hidden="true"><svg width="14" height="14" viewBox="0 0 24 24" style="fill: none; stroke: currentColor; stroke-width: 2; stroke-linecap: round"><path d="M12 5v14M5 12h14"></path></svg></span></summary>
-<p style="margin: 0; padding: 0 56px 24px 4px; font-size: 15.5px; line-height: 1.72; color: #3B414A">A presença de advogado não é obrigatória em todos os casos, mas a orientação prévia ajuda a entender em que condição você está sendo chamado — como testemunha, vítima ou investigado — e a exercer os direitos previstos em lei antes de prestar qualquer declaração.</p>
-</details>
-<details class="faq-item" style="border-top: 1px solid rgba(10, 28, 56, 0.1)">
-<summary><h3 style="margin: 0; font-size: 17px; font-weight: 600; line-height: 1.4; color: #0A1C38">Posso ter acompanhamento de advogado durante meu depoimento?</h3><span class="faq-plus" aria-hidden="true"><svg width="14" height="14" viewBox="0 0 24 24" style="fill: none; stroke: currentColor; stroke-width: 2; stroke-linecap: round"><path d="M12 5v14M5 12h14"></path></svg></span></summary>
-<p style="margin: 0; padding: 0 56px 24px 4px; font-size: 15.5px; line-height: 1.72; color: #3B414A">Sim. O Estatuto da Advocacia assegura ao advogado o direito de assistir o cliente investigado durante a apuração, inclusive em depoimentos. Também é garantido o direito de permanecer em silêncio.</p>
+<summary><h3 style="margin: 0; font-size: 17px; font-weight: 600; line-height: 1.4; color: #0A1C38">Recebi uma intimação da delegacia. O que faço?</h3><span class="faq-plus" aria-hidden="true"><svg width="14" height="14" viewBox="0 0 24 24" style="fill: none; stroke: currentColor; stroke-width: 2; stroke-linecap: round"><path d="M12 5v14M5 12h14"></path></svg></span></summary>
+<p style="margin: 0; padding: 0 56px 24px 4px; font-size: 15.5px; line-height: 1.72; color: #3B414A">A orientação e o acompanhamento de um advogado criminalista são fundamentais para compreender os motivos da intimação, identificar a natureza da investigação e definir a estratégia defensiva mais adequada. A assistência do advogado também permite que o intimado conheça e exerça seus direitos, especialmente no momento de prestar declarações perante a autoridade policial.</p>
 </details>
 <details class="faq-item" style="border-top: 1px solid rgba(10, 28, 56, 0.1)">
 <summary><h3 style="margin: 0; font-size: 17px; font-weight: 600; line-height: 1.4; color: #0A1C38">O que acontece em uma audiência de custódia?</h3><span class="faq-plus" aria-hidden="true"><svg width="14" height="14" viewBox="0 0 24 24" style="fill: none; stroke: currentColor; stroke-width: 2; stroke-linecap: round"><path d="M12 5v14M5 12h14"></path></svg></span></summary>
-<p style="margin: 0; padding: 0 56px 24px 4px; font-size: 15.5px; line-height: 1.72; color: #3B414A">Após a prisão em flagrante, a pessoa deve ser apresentada a um juiz, em regra em até 24 horas. Na audiência, o juiz verifica a legalidade da prisão e decide se ela será relaxada, convertida em preventiva ou substituída por liberdade provisória, com ou sem medidas cautelares.</p>
-</details>
-<details class="faq-item" style="border-top: 1px solid rgba(10, 28, 56, 0.1)">
-<summary><h3 style="margin: 0; font-size: 17px; font-weight: 600; line-height: 1.4; color: #0A1C38">Quando é possível pedir habeas corpus?</h3><span class="faq-plus" aria-hidden="true"><svg width="14" height="14" viewBox="0 0 24 24" style="fill: none; stroke: currentColor; stroke-width: 2; stroke-linecap: round"><path d="M12 5v14M5 12h14"></path></svg></span></summary>
-<p style="margin: 0; padding: 0 56px 24px 4px; font-size: 15.5px; line-height: 1.72; color: #3B414A">O habeas corpus é cabível quando alguém sofre ou está ameaçado de sofrer restrição em sua liberdade de locomoção por ilegalidade ou abuso de poder. O cabimento depende da análise da situação concreta.</p>
+<p style="margin: 0; padding: 0 56px 24px 4px; font-size: 15.5px; line-height: 1.72; color: #3B414A">Na audiência de custódia, a pessoa presa é apresentada a um juiz, que analisa a legalidade da prisão e a necessidade de sua manutenção. Após ouvir o Ministério Público e a defesa, o magistrado decide se a pessoa poderá responder em liberdade, com ou sem medidas cautelares, ou se a prisão deverá ser mantida.</p>
 </details>
 <details class="faq-item" style="border-top: 1px solid rgba(10, 28, 56, 0.1)">
 <summary><h3 style="margin: 0; font-size: 17px; font-weight: 600; line-height: 1.4; color: #0A1C38">Fui acusado de um crime. O que devo fazer?</h3><span class="faq-plus" aria-hidden="true"><svg width="14" height="14" viewBox="0 0 24 24" style="fill: none; stroke: currentColor; stroke-width: 2; stroke-linecap: round"><path d="M12 5v14M5 12h14"></path></svg></span></summary>
-<p style="margin: 0; padding: 0 56px 24px 4px; font-size: 15.5px; line-height: 1.72; color: #3B414A">Evite prestar declarações ou discutir o fato antes de receber orientação jurídica. Guarde intimações, documentos e mensagens relacionados e procure um advogado para avaliar a situação e os próximos passos.</p>
-</details>
-<details class="faq-item" style="border-top: 1px solid rgba(10, 28, 56, 0.1)">
-<summary><h3 style="margin: 0; font-size: 17px; font-weight: 600; line-height: 1.4; color: #0A1C38">Qual a diferença entre investigação e processo criminal?</h3><span class="faq-plus" aria-hidden="true"><svg width="14" height="14" viewBox="0 0 24 24" style="fill: none; stroke: currentColor; stroke-width: 2; stroke-linecap: round"><path d="M12 5v14M5 12h14"></path></svg></span></summary>
-<p style="margin: 0; padding: 0 56px 24px 4px; font-size: 15.5px; line-height: 1.72; color: #3B414A">A investigação, em geral conduzida pela polícia por meio de inquérito, apura se houve crime e quem pode ser o autor. O processo criminal começa quando o Ministério Público oferece denúncia e o juiz a recebe; a partir daí, a pessoa passa à condição de ré.</p>
+<p style="margin: 0; padding: 0 56px 24px 4px; font-size: 15.5px; line-height: 1.72; color: #3B414A">Evite prestar declarações ou discutir o fato antes de receber orientação jurídica. Guarde intimações, documentos e mensagens relacionados e procure um advogado criminalista para avaliar a situação e os próximos passos.</p>
 </details>
 <details class="faq-item" style="border-top: 1px solid rgba(10, 28, 56, 0.1)">
 <summary><h3 style="margin: 0; font-size: 17px; font-weight: 600; line-height: 1.4; color: #0A1C38">Uma medida protetiva significa que já existe uma condenação?</h3><span class="faq-plus" aria-hidden="true"><svg width="14" height="14" viewBox="0 0 24 24" style="fill: none; stroke: currentColor; stroke-width: 2; stroke-linecap: round"><path d="M12 5v14M5 12h14"></path></svg></span></summary>
-<p style="margin: 0; padding: 0 56px 24px 4px; font-size: 15.5px; line-height: 1.72; color: #3B414A">Não. A medida protetiva é uma decisão de urgência, que pode ser concedida antes de qualquer processo ser concluído, e não equivale a condenação. Ainda assim, deve ser cumprida enquanto estiver em vigor: o descumprimento é crime.</p>
+<p style="margin: 0; padding: 0 56px 24px 4px; font-size: 15.5px; line-height: 1.72; color: #3B414A">Não. A medida protetiva é uma decisão de urgência, que pode ser concedida antes de qualquer processo, e não equivale a condenação. Ainda assim, deve ser cumprida enquanto estiver em vigor: o descumprimento é crime.</p>
 </details>
 <details class="faq-item" style="border-top: 1px solid rgba(10, 28, 56, 0.1)">
-<summary><h3 style="margin: 0; font-size: 17px; font-weight: 600; line-height: 1.4; color: #0A1C38">Recusar o bafômetro é crime?</h3><span class="faq-plus" aria-hidden="true"><svg width="14" height="14" viewBox="0 0 24 24" style="fill: none; stroke: currentColor; stroke-width: 2; stroke-linecap: round"><path d="M12 5v14M5 12h14"></path></svg></span></summary>
-<p style="margin: 0; padding: 0 56px 24px 4px; font-size: 15.5px; line-height: 1.72; color: #3B414A">A recusa, por si só, não é crime. Ela configura infração administrativa de trânsito, sujeita a multa e suspensão do direito de dirigir. O crime de embriaguez ao volante, porém, pode ser apurado por outros meios de prova.</p>
+<summary><h3 style="margin: 0; font-size: 17px; font-weight: 600; line-height: 1.4; color: #0A1C38">É possível recorrer de uma sentença condenatória?</h3><span class="faq-plus" aria-hidden="true"><svg width="14" height="14" viewBox="0 0 24 24" style="fill: none; stroke: currentColor; stroke-width: 2; stroke-linecap: round"><path d="M12 5v14M5 12h14"></path></svg></span></summary>
+<p style="margin: 0; padding: 0 56px 24px 4px; font-size: 15.5px; line-height: 1.72; color: #3B414A">Sim. A defesa pode recorrer de uma sentença condenatória para solicitar a reavaliação da decisão por uma instância superior, buscando, conforme o caso, a absolvição, a redução da pena, a alteração do regime de cumprimento ou a anulação do processo. Como os prazos para recorrer são curtos, é importante procurar um advogado criminalista o quanto antes para analisar a sentença e orientar a defesa.</p>
 </details>
 <details class="faq-item" style="border-top: 1px solid rgba(10, 28, 56, 0.1)">
-<summary><h3 style="margin: 0; font-size: 17px; font-weight: 600; line-height: 1.4; color: #0A1C38">É possível recorrer de uma decisão criminal?</h3><span class="faq-plus" aria-hidden="true"><svg width="14" height="14" viewBox="0 0 24 24" style="fill: none; stroke: currentColor; stroke-width: 2; stroke-linecap: round"><path d="M12 5v14M5 12h14"></path></svg></span></summary>
-<p style="margin: 0; padding: 0 56px 24px 4px; font-size: 15.5px; line-height: 1.72; color: #3B414A">Sim, a legislação prevê recursos contra decisões criminais. Os prazos costumam ser curtos — alguns de poucos dias — por isso a análise deve ser feita logo após a decisão.</p>
+<summary><h3 style="margin: 0; font-size: 17px; font-weight: 600; line-height: 1.4; color: #0A1C38">Foi expedido um mandado de prisão. E agora?</h3><span class="faq-plus" aria-hidden="true"><svg width="14" height="14" viewBox="0 0 24 24" style="fill: none; stroke: currentColor; stroke-width: 2; stroke-linecap: round"><path d="M12 5v14M5 12h14"></path></svg></span></summary>
+<p style="margin: 0; padding: 0 56px 24px 4px; font-size: 15.5px; line-height: 1.72; color: #3B414A">A expedição de um mandado de prisão exige atenção imediata. É fundamental procurar um advogado criminalista para identificar a origem da ordem, avaliar a existência de eventuais ilegalidades e definir a estratégia jurídica adequada para o caso.</p>
 </details>
 <details class="faq-item" style="border-top: 1px solid rgba(10, 28, 56, 0.1)">
-<summary><h3 style="margin: 0; font-size: 17px; font-weight: 600; line-height: 1.4; color: #0A1C38">É possível revisar uma condenação definitiva?</h3><span class="faq-plus" aria-hidden="true"><svg width="14" height="14" viewBox="0 0 24 24" style="fill: none; stroke: currentColor; stroke-width: 2; stroke-linecap: round"><path d="M12 5v14M5 12h14"></path></svg></span></summary>
-<p style="margin: 0; padding: 0 56px 24px 4px; font-size: 15.5px; line-height: 1.72; color: #3B414A">Em hipóteses específicas previstas em lei, sim, por meio da revisão criminal — por exemplo, quando a condenação se baseou em prova falsa ou quando surgem novas provas relevantes. É preciso analisar se o caso se enquadra nessas hipóteses.</p>
+<summary><h3 style="margin: 0; font-size: 17px; font-weight: 600; line-height: 1.4; color: #0A1C38">Fui condenado. Quais são as possibilidades na execução penal?</h3><span class="faq-plus" aria-hidden="true"><svg width="14" height="14" viewBox="0 0 24 24" style="fill: none; stroke: currentColor; stroke-width: 2; stroke-linecap: round"><path d="M12 5v14M5 12h14"></path></svg></span></summary>
+<p style="margin: 0; padding: 0 56px 24px 4px; font-size: 15.5px; line-height: 1.72; color: #3B414A">A condenação não encerra as possibilidades de atuação da defesa. Na fase de execução penal, o advogado criminalista acompanha o cumprimento da pena e avalia os direitos e benefícios aplicáveis ao caso, como a detração penal, a remição da pena, a progressão de regime, o indulto e a comutação da pena. A atuação do advogado criminalista é fundamental para assegurar os direitos do apenado e o cumprimento da pena em conformidade com a legislação vigente.</p>
 </details>
 <details class="faq-item" style="border-top: 1px solid rgba(10, 28, 56, 0.1)">
-<summary><h3 style="margin: 0; font-size: 17px; font-weight: 600; line-height: 1.4; color: #0A1C38">Como funciona a progressão de regime?</h3><span class="faq-plus" aria-hidden="true"><svg width="14" height="14" viewBox="0 0 24 24" style="fill: none; stroke: currentColor; stroke-width: 2; stroke-linecap: round"><path d="M12 5v14M5 12h14"></path></svg></span></summary>
-<p style="margin: 0; padding: 0 56px 24px 4px; font-size: 15.5px; line-height: 1.72; color: #3B414A">É a passagem para um regime menos rigoroso após o cumprimento de uma fração da pena, que varia conforme o crime e as circunstâncias, somada a requisitos como o bom comportamento carcerário. O pedido é analisado pelo juiz da execução.</p>
+<summary><h3 style="margin: 0; font-size: 17px; font-weight: 600; line-height: 1.4; color: #0A1C38">É possível revisar uma condenação criminal?</h3><span class="faq-plus" aria-hidden="true"><svg width="14" height="14" viewBox="0 0 24 24" style="fill: none; stroke: currentColor; stroke-width: 2; stroke-linecap: round"><path d="M12 5v14M5 12h14"></path></svg></span></summary>
+<p style="margin: 0; padding: 0 56px 24px 4px; font-size: 15.5px; line-height: 1.72; color: #3B414A">Sim. A revisão criminal permite impugnar uma condenação definitiva nas hipóteses previstas em lei, como quando a sentença condenatória for contrária ao texto expresso da lei penal ou à evidência dos autos, se fundamentar em provas comprovadamente falsas ou quando surgirem novas provas de inocência do condenado. Conforme o caso, o pedido pode buscar a absolvição, a redução da pena ou a desclassificação para outro crime.</p>
 </details>
 </div>
 </div>
@@ -788,6 +856,11 @@ Falar com um advogado
 <span style="font-size: 11px; font-weight: 600; letter-spacing: 0.2em; text-transform: uppercase; color: #C9CDD3">Direito Penal · Grande ABC</span>
 <span style="font-size: 14px; line-height: 1.7">Santo André, São Bernardo do Campo, São Caetano do Sul, Diadema, Mauá, Ribeirão Pires e Rio Grande da Serra.</span>
 </div>
+<address style="font-style: normal; display: flex; flex-direction: column; gap: 6px; font-size: 14px; line-height: 1.6; max-width: 320px">
+<span style="color: #F3F4F6">Davi Barroso Alberto · OAB/SP 497.624</span>
+<span>Rua Coronel Alfredo Flaquer, 125, sala 72<br>Centro, Santo André/SP, 09020-030</span>
+<a href="tel:+551150712608" style="color: #C9CDD3; text-decoration: none">(11) 5071-2608</a>
+</address>
 </div>
 <div style="border-top: 1px solid rgba(255, 255, 255, 0.08); padding-top: 22px; display: flex; flex-wrap: wrap; justify-content: space-between; gap: 16px; font-size: 12.5px; line-height: 1.6; color: #8E97A4">
 <span>Conteúdo de caráter informativo. Não constitui promessa de resultado.</span>
