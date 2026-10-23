@@ -676,7 +676,7 @@ Conversar sobre meu caso
 </div>
 <div style="border-top: 1px solid rgba(10, 28, 56, 0.1); padding: 14px 0; display: flex; flex-direction: column; gap: 4px">
 <dt style="font-size: 11px; font-weight: 600; letter-spacing: 0.18em; text-transform: uppercase; color: #5B6370">Telefone</dt>
-<dd style="margin: 0; font-size: 15px; line-height: 1.55; color: #0A1C38"><a href="tel:+551150712608" style="color: #0A1C38; text-decoration: none">(11) 5071-2608</a></dd>
+<dd style="margin: 0; font-size: 15px; line-height: 1.55; color: #0A1C38"><a href="tel:+551150712608" target="_top" style="color: #0A1C38; text-decoration: none">(11) 5071-2608</a></dd>
 </div>
 <div style="border-top: 1px solid rgba(10, 28, 56, 0.1); padding: 14px 0; display: flex; flex-direction: column; gap: 4px; grid-column: 1 / -1">
 <dt style="font-size: 11px; font-weight: 600; letter-spacing: 0.18em; text-transform: uppercase; color: #5B6370">Endereço</dt>
@@ -859,7 +859,7 @@ Falar com um advogado
 <address style="font-style: normal; display: flex; flex-direction: column; gap: 6px; font-size: 14px; line-height: 1.6; max-width: 320px">
 <span style="color: #F3F4F6">Davi Barroso Alberto · OAB/SP 497.624</span>
 <span>Rua Coronel Alfredo Flaquer, 125, sala 72<br>Centro, Santo André/SP, 09020-030</span>
-<a href="tel:+551150712608" style="color: #C9CDD3; text-decoration: none">(11) 5071-2608</a>
+<a href="tel:+551150712608" target="_top" style="color: #C9CDD3; text-decoration: none">(11) 5071-2608</a>
 </address>
 </div>
 <div style="border-top: 1px solid rgba(255, 255, 255, 0.08); padding-top: 22px; display: flex; flex-wrap: wrap; justify-content: space-between; gap: 16px; font-size: 12.5px; line-height: 1.6; color: #8E97A4">
@@ -881,6 +881,10 @@ Falar com um advogado
   var SUPABASE_URL = 'https://qxhnjzyhtllmtdrcyygi.supabase.co';
   var SUPABASE_ANON = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InF4aG5qenlodGxsbXRkcmN5eWdpIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODIyMzczNjgsImV4cCI6MjA5NzgxMzM2OH0.DWf4I_x9F--H7ZZHUt_n4V3B__Nlsf1jNZdUV0vNBLU';
   var SITE = 'davi-barroso';
+  // Quando a LP roda dentro do iframe do WordPress, o referrer real chega via ?ref=
+  var PARAMS = new URLSearchParams(location.search);
+  var REFERRER = PARAMS.has('ref') ? PARAMS.get('ref') : (document.referrer || '');
+  var IN_FRAME = (function () { try { return window.self !== window.top; } catch (e) { return true; } })();
 
   function insert(table, row) {
     return fetch(SUPABASE_URL + '/rest/v1/' + table, {
@@ -908,9 +912,9 @@ Falar com um advogado
     if (p.get('gclid') || p.get('gbraid') || p.get('wbraid') || src === 'google') origem = 'Google Ads';
     else if (p.get('fbclid') || /facebook|instagram|meta|^fb$|^ig$/.test(src)) origem = 'Meta Ads';
     else if (src) origem = src;
-    else if (document.referrer) {
+    else if (REFERRER) {
       try {
-        var h = new URL(document.referrer).hostname.replace(/^www\./, '');
+        var h = new URL(REFERRER).hostname.replace(/^www\./, '');
         origem = h === location.hostname.replace(/^www\./, '') ? 'Direto' : (/google\./.test(h) ? 'Google (orgânico)' : h);
       } catch (e) { origem = 'Direto'; }
     } else origem = 'Direto';
@@ -922,7 +926,7 @@ Falar com um advogado
 
   // 1 visita por carregamento de página
   getOrigem();
-  insert('lp_visits', { site: SITE, referrer: document.referrer || null, path: location.pathname }).catch(function () {});
+  insert('lp_visits', { site: SITE, referrer: REFERRER || null, path: location.pathname }).catch(function () {});
 
   // Formulário
   var form = document.getElementById('lead-form');
@@ -959,10 +963,32 @@ Falar com um advogado
     btn.lastChild.textContent = ' Enviando…';
 
     var row = { site: SITE, nome: n, whatsapp: digits, origem: getOrigem() };
+
+    // URL da página de confirmação, levando adiante gclid/fbclid/utm para as conversões
+    var q = new URLSearchParams(location.search);
+    q.delete('ref');
+    q.set('nome', n.split(' ')[0]);
+    var target = new URL('redirect.html?' + q.toString(), location.href).href;
+
     var done = false;
     function go() {
       if (done) return; done = true;
-      location.href = 'redirect.html?nome=' + encodeURIComponent(n.split(' ')[0]);
+      if (IN_FRAME) {
+        // Sai do iframe: o WhatsApp não abre dentro de iframe.
+        // Precisa acontecer ainda dentro do clique, senão o navegador bloqueia.
+        try { window.top.location.href = target; } catch (e) {}
+        // Se o navegador bloquear, segue dentro do iframe (o redirect mostra o botão)
+        setTimeout(function () { location.href = target; }, 900);
+      } else {
+        location.href = target;
+      }
+    }
+
+    if (IN_FRAME) {
+      // keepalive garante que o lead é gravado mesmo com a troca de página
+      insert('lp_leads', row).catch(function () {});
+      go();
+      return;
     }
     insert('lp_leads', row).then(function (r) {
       if (!r.ok) return insert('lp_leads', row);

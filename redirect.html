@@ -50,7 +50,7 @@ Abrir o WhatsApp
 (function () {
   // ===== CONFIGURAÇÃO =====
   // Número do WhatsApp do escritório: DDI + DDD + número, só dígitos. Ex.: 5511999999999
-  var WHATSAPP_NUMERO = '';
+  var WHATSAPP_NUMERO = '551150712608';
   // Mensagem neutra de propósito: a prévia da conversa não expõe a situação do cliente
   var MENSAGEM = 'Olá, gostaria de orientação jurídica.';
   // =========================
@@ -74,6 +74,15 @@ Abrir o WhatsApp
   }
   var url = 'https://wa.me/' + numero + '?text=' + encodeURIComponent(MENSAGEM);
   btn.href = url;
+  var inFrame = (function () { try { return window.self !== window.top; } catch (e) { return true; } })();
+  if (inFrame) {
+    // Dentro de iframe o WhatsApp não carrega: o botão abre na janela principal
+    btn.target = '_top';
+    document.getElementById('texto').textContent = 'Toque no botão abaixo para continuar o atendimento pelo WhatsApp.';
+    document.getElementById('bar').style.display = 'none';
+    document.querySelector('.small').style.display = 'none';
+    return;
+  }
   setTimeout(function () { location.href = url; }, 2500);
 })();
 </script>
